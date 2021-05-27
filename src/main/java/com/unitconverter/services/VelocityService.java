@@ -13,11 +13,11 @@ public class VelocityService {
 
     public ResponseEntity<?> convertVelocity(String unit, Double amount) {
         switch (unit){
-            case "kilometerPerHour" : return new ResponseEntity<>(convertKilometerPerHour(amount), HttpStatus.OK);
-            case "ilePerHours" : return new ResponseEntity<>(convertMilePerHour(amount), HttpStatus.OK);
-            case "KilometerPerSecond" : return new ResponseEntity<>(convertKilometerPerSecond(amount), HttpStatus.OK);
-            case "milePerSecond" : return new ResponseEntity<>(convertMilePerSecond(amount), HttpStatus.OK);
-            case "meterPerSecond" : return new ResponseEntity<>(convertMeterPerSecond(amount), HttpStatus.OK);
+            case "kilometersPerHour" : return new ResponseEntity<>(convertKilometerPerHour(amount), HttpStatus.OK);
+            case "milesPerHours" : return new ResponseEntity<>(convertMilePerHour(amount), HttpStatus.OK);
+            case "kilometersPerSecond" : return new ResponseEntity<>(convertKilometerPerSecond(amount), HttpStatus.OK);
+            case "milesPerSecond" : return new ResponseEntity<>(convertMilePerSecond(amount), HttpStatus.OK);
+            case "metersPerSecond" : return new ResponseEntity<>(convertMeterPerSecond(amount), HttpStatus.OK);
             case "footPerSecond" : return new ResponseEntity<>(convertFootPerSecond(amount), HttpStatus.OK);
             default:return ResponseEntity.status(HttpStatus.NOT_FOUND).body("There was a problem getting Time resource.");
         }
