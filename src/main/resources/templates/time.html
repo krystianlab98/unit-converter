@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit Converter</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/styleModel.css}"/>
+</head>
+<body>
+    <div class="container">
+        <ul>
+            <li>
+                <span>
+                    Godzin
+                </span>
+                <div><input id="hour" type="number"> </div>
+            </li>
+            <li>
+                <span>
+                    Minut
+                </span>
+                <div><input id="minute" type="number"> </div>
+            </li>
+            <li>
+                <span>
+                    Sekund
+                </span>
+                <div><input id="second" type="number"> </div>
+            </li>
+            <li>
+                <span>
+                    Milisekund
+                </span>
+                <div><input id="millisecond" type="number"> </div>
+            </li>
+            <li>
+                <span>
+                    Microsekund
+                </span>
+                <div><input id="microsecond" type="number"> </div>
+            </li>
+            <li>
+                <span>
+                    Nanosecund
+                </span>
+                <div><input id="nanosecond" type="number"> </div>
+            </li>
+            <li>
+                <a class="back-button" href="http://localhost:8080/web/api"><button>Powrót</button></a>
+            </li>
+        </ul>
+
+    </div>
+    <script type="text/javascript">
+
+
+        function onPageLoad(){
+            setDefaultUnits();
+            setEvents();
+        }
+
+         function getData(url = ''){
+            return  fetch(url).then((response) => response.json());
+        }
+
+        async function setDefaultUnits() {
+            const url = "http://localhost:8080/web/api/times/hour";
+            const data = await getData(url);
+            console.log(data)
+            setInput(data)
+        }
+
+        function setInput(model){
+            document.getElementById("hour").value = model.hour;
+            document.getElementById("minute").value = model.minute;
+            document.getElementById("second").value = model.second;
+            document.getElementById("millisecond").value = model.millisecond;
+            document.getElementById("microsecond").value = model.microsecond;
+            document.getElementById("nanosecond").value = model.nanosecond;
+        }
+
+        async function handleInput(event) {
+            const value = event.target.value;
+            if(value == ""){
+                setInput({
+                    hour:'', minute:'', second:'', millisecond:'', microsecond:'', nanosecond:''
+                });
+                return
+            }
+            const id = event.target.getAttribute("id");
+            const url = `http://localhost:8080/web/api/times/${id}/${value}`
+            const data = await getData(url);
+            console.log(data);
+            setInput(data);
+        }
+
+
+
+        async function setEvents(){
+
+            document.getElementById("hour").addEventListener("input", handleInput)
+            document.getElementById("minute").addEventListener("input", handleInput)
+            document.getElementById("second").addEventListener("input",handleInput)
+            document.getElementById("millisecond").addEventListener("input", handleInput)
+            document.getElementById("microsecond").addEventListener("input",handleInput)
+            document.getElementById("nanosecond").addEventListener("input",handleInput)
+        }
+
+        window.onload = onPageLoad;
+    </script>
+</body>
+</html>
