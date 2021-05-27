@@ -6,15 +6,15 @@ import lombok.Setter;
 
 public class Length {
 
-    private Double kilometer;
-    private Double meter;
-    private Double decimeter;
-    private Double centimeter;
-    private Double millimeter;
-    private Double mile;
-    private Double yard;
-    private Double foot;
-    private Double inch;
+    private double kilometer;
+    private double meter;
+    private double decimeter;
+    private double centimeter;
+    private double millimeter;
+    private double mile;
+    private double yard;
+    private double foot;
+    private double inch;
 
     public Length() {
     }

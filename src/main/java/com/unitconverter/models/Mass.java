@@ -1,10 +1,6 @@
 package com.unitconverter.models;
 
 
-import lombok.Getter;
-import lombok.Setter;
-
-
 public class Mass {
 
     private double milligram;

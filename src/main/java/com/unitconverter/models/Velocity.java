@@ -10,7 +10,7 @@ public class Velocity {
     private double milesPerHours;
     private double kilometersPerSecond;
     private double milesPerSecond;
-    private double meterPerSecond;
+    private double metersPerSecond;
     private double footPerSecond;
 
     public Velocity() {
@@ -49,11 +49,11 @@ public class Velocity {
     }
 
     public double getMeterPerSecond() {
-        return meterPerSecond;
+        return metersPerSecond;
     }
 
     public void setMeterPerSecond(double meterPerSecond) {
-        this.meterPerSecond = meterPerSecond;
+        this.metersPerSecond = meterPerSecond;
     }
 
     public double getFootPerSecond() {

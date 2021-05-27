@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/web/api/temperature")
+@RequestMapping("/web/api/")
 public class TemperatureController {
 
     private final TemperatureService temperatureService;
@@ -21,17 +21,11 @@ public class TemperatureController {
         this.temperatureService = temperatureService;
     }
 
-
-    @GetMapping
-    public ResponseEntity<?> getTemperature(){
-        Temperature temperature = new Temperature();
-        return new ResponseEntity<>(temperature, HttpStatus.OK);
-    }
-    @GetMapping("/{unit}")
+    @GetMapping("temperatures/{unit}")
     public ResponseEntity<?> getDefaultTemperature(@PathVariable String unit){
         return temperatureService.convertTemperature(unit);
     }
-    @GetMapping("/{unit}/{amount}")
+    @GetMapping("temperatures/{unit}/{amount}")
     public ResponseEntity<?> getDefaultTemperature(@PathVariable String unit,@PathVariable Double amount){
         return temperatureService.convertTemperature(unit, amount);
     }

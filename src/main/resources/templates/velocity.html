@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit Converter</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/styleModel.css}"/>
+</head>
+<body>
+
+    <div class="container">
+        <ul>
+            <li>
+                <span>
+                    Kilometry na godzine
+                </span>
+                <div><input id="kilometersPerHour" type="number"> </div>
+            </li>
+            <li>
+                <span>
+                    Mile na godzine
+                </span>
+                <div><input id="milesPerHours" type="number"> </div>
+            </li>
+            <li>
+                <span>
+                    Kilometry na sekunde
+                </span>
+                <div><input id="kilometersPerSecond" type="number"> </div>
+            </li>
+            <li>
+                <span>
+                    Mile na sekunde
+                </span>
+                <div><input id="milesPerSecond" type="number"> </div>
+            </li>
+            <li>
+                <span>
+                    Metry na sekunde
+                </span>
+                <div><input id="metersPerSecond" type="number"> </div>
+            </li>
+            <li>
+                <span>
+                    Stopy na sekunde
+                </span>
+                <div><input id="footPerSecond" type="number"> </div>
+            </li>
+
+            <li>
+                <a class="back-button" href="http://localhost:8080/web/api"><button>Powrót</button></a>
+            </li>
+        </ul>
+
+    </div>
+    <script type="text/javascript">
+
+
+        function onPageLoad(){
+            setDefaultUnits();
+            setEvents();
+        }
+
+         function getData(url = ''){
+            return  fetch(url).then((response) => response.json());
+        }
+
+        async function setDefaultUnits() {
+            const url = "http://localhost:8080/web/api/velocity/kilometersPerHour";
+            const data = await getData(url);
+            console.log(data)
+            setInput(data)
+        }
+
+        function setInput(model){
+            document.getElementById("kilometersPerHour").value = model.kilometersPerHour;
+            document.getElementById("milesPerHours").value = model.milesPerHours;
+            document.getElementById("kilometersPerSecond").value = model.kilometersPerSecond;
+            document.getElementById("milesPerSecond").value = model.milesPerSecond;
+            document.getElementById("metersPerSecond").value = model.meterPerSecond;
+            document.getElementById("footPerSecond").value = model.footPerSecond;
+        }
+
+        async function handleInput(event) {
+            const value = event.target.value;
+            if(value == ""){
+                setInput({
+                    kilometersPerHour:'', milesPerHours:'', kilometersPerSecond:'', milesPerSecond:'', meterPerSecond:'', footPerSecond:''
+                });
+                return
+            }
+            const id = event.target.getAttribute("id");
+            const url = `http://localhost:8080/web/api/velocity/${id}/${value}`
+            const data = await getData(url);
+            console.log(data);
+            setInput(data);
+        }
+
+        async function setEvents(){
+
+            document.getElementById("kilometersPerHour").addEventListener("input", handleInput)
+            document.getElementById("milesPerHours").addEventListener("input", handleInput)
+            document.getElementById("kilometersPerSecond").addEventListener("input",handleInput)
+            document.getElementById("milesPerSecond").addEventListener("input", handleInput)
+            document.getElementById("millimeter").addEventListener("input",handleInput)
+            document.getElementById("meterPerSecond").addEventListener("input",handleInput)
+            document.getElementById("footPerSecond").addEventListener("input",handleInput)
+
+        }
+
+        window.onload = onPageLoad;
+    </script>
+</body>
+</html>

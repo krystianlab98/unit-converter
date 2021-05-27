@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/web/api/velocity")
+@RequestMapping("/web/api/")
 public class VelocityController {
 
     private VelocityService velocityService;
@@ -21,19 +21,14 @@ public class VelocityController {
         this.velocityService = velocityService;
     }
 
-    @GetMapping()
-    public ResponseEntity<?> getVelocityUnits(){
-        Velocity velocity = new Velocity();
-        return new ResponseEntity<>(velocity, HttpStatus.OK);
-    }
 
-    @GetMapping("/{unit}")
+    @GetMapping("velocity/{unit}")
     public ResponseEntity<?> getDefaultVelocity(@PathVariable String unit){
         return   velocityService.convertVelocity(unit);
     }
 
 
-    @GetMapping("/{unit}/{amount}")
+    @GetMapping("velocity/{unit}/{amount}")
     public ResponseEntity<?> getCustomVelocity(@PathVariable String unit, @PathVariable Double amount){
         return   velocityService.convertVelocity(unit, (Double) amount);
     }
