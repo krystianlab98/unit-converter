@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/web/api/times")
+@RequestMapping("/web/api/")
 public class TimeController {
 
     TimeService timeService;
@@ -23,19 +23,14 @@ public class TimeController {
         this.timeService = timeService;
     }
 
-    @GetMapping()
-    public ResponseEntity<?> getTimeUnits(){
-        Time time = new Time();
-        return new ResponseEntity<>(time, HttpStatus.OK);
-    }
 
-    @GetMapping("/{unit}")
+    @GetMapping("times/{unit}")
     public ResponseEntity<?> getDefaultTime(@PathVariable String unit){
         return   timeService.convertTime(unit);
     }
 
 
-    @GetMapping("/{unit}/{amount}")
+    @GetMapping("times/{unit}/{amount}")
     public ResponseEntity<?> getCustomTime(@PathVariable String unit, @PathVariable Double amount){
         return   timeService.convertTime(unit, (Double) amount);
     }

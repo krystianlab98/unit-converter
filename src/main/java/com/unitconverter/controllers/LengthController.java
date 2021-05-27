@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/web/api/lengths")
+@RequestMapping("/web/api/")
 public class LengthController {
 
     LengthService lengthService;
@@ -22,19 +22,14 @@ public class LengthController {
         this.lengthService = lengthService;
     }
 
-    @GetMapping()
-    public ResponseEntity<?> getLengthUnits(){
-        Length length = new Length();
-        return new ResponseEntity<>(length, HttpStatus.OK);
-    }
 
-    @GetMapping("/{unit}")
+    @GetMapping("lengths/{unit}")
     public ResponseEntity<?> getDefaultLength(@PathVariable String unit){
         return   lengthService.convertLength(unit);
     }
 
 
-    @GetMapping("/{unit}/{amount}")
+    @GetMapping("lengths/{unit}/{amount}")
     public ResponseEntity<?> getCustomLength(@PathVariable String unit, @PathVariable Double amount){
         return   lengthService.convertLength(unit, (Double) amount);
     }

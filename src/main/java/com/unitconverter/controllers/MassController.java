@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/web/api/mass")
+@RequestMapping("/web/api/")
 public class MassController {
 
     private MassService massService;
@@ -21,19 +21,14 @@ public class MassController {
         this.massService = massService;
     }
 
-    @GetMapping
-    public ResponseEntity getMasses(){
-        Mass mass = new Mass();
-        return new ResponseEntity(mass, HttpStatus.OK);
-    }
 
-    @GetMapping("/{unit}")
+    @GetMapping("mass/{unit}")
     public ResponseEntity<?> getDefaultMass(@PathVariable String unit){
         return   massService.convertMass(unit);
     }
 
 
-    @GetMapping("/{unit}/{amount}")
+    @GetMapping("mass/{unit}/{amount}")
     public ResponseEntity<?> getCustomMass(@PathVariable String unit, @PathVariable Double amount){
         return   massService.convertMass(unit, (Double) amount);
     }
