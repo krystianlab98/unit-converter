@@ -34,7 +34,7 @@ public class MassService {
         mass.setKilogram(amount * 1.0e-6);
         mass.setTon(amount * 1.0e-9);
         mass.setOunce(amount * 3.5274e-5);
-        mass.setPound(amount * 2.2046-6);
+        mass.setPound(amount * 2.2046e-6);
         return mass;
     }
 
